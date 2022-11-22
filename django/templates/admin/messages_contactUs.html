@@ -1,0 +1,152 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+{% load static%}
+<script>
+    document.getElementById('messages-li').classList.add('active')
+</script>
+
+<div class="container " style="height:75vh ;">
+    <div class="card h-100">
+        <div class="card-header h4 text-center">
+            Messages
+        </div>
+        <div class="card-body  overflow-hidden" style="max-height:100% ;">
+            <div class="row " style="height: 100%; ">
+                <div class="side-bar-msg bg-soft-primary card col-md-2 col-lg-2 col-xl-2 col-sm-11 col-11 h-100 mb-0 shadow-sm     text-black "
+                    style="min-width:5rem ;">
+                    <div class="card-body p-0 pt-4 cb-msg">
+                        <ul class="navbar-nav ul-msg" id="">
+                            <li class="card mb-2 col-9 nav-item ps-3 w-100  " style="min-width:3rem ;" id="navMsg1" onclick="toggleNavMsg1()">
+                                <a class="nav-link"  data-hx-get="{% url 'all_messages' %} " hx-target="#message_list " hx-trigger="click" style="cursor:pointer ;" > 
+                                    <i class="icon">
+                                        <svg width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                <path opacity="0.4" d="M22 15.94C22 18.73 19.76 20.99 16.97 21H16.96H7.05C4.27 21 2 18.75 2 15.96V15.95C2 15.95 2.006 11.524 2.014 9.298C2.015 8.88 2.495 8.646 2.822 8.906C5.198 10.791 9.447 14.228 9.5 14.273C10.21 14.842 11.11 15.163 12.03 15.163C12.95 15.163 13.85 14.842 14.56 14.262C14.613 14.227 18.767 10.893 21.179 8.977C21.507 8.716 21.989 8.95 21.99 9.367C22 11.576 22 15.94 22 15.94Z" fill="currentColor"></path>                                <path d="M21.4759 5.67351C20.6099 4.04151 18.9059 2.99951 17.0299 2.99951H7.04988C5.17388 2.99951 3.46988 4.04151 2.60388 5.67351C2.40988 6.03851 2.50188 6.49351 2.82488 6.75151L10.2499 12.6905C10.7699 13.1105 11.3999 13.3195 12.0299 13.3195C12.0339 13.3195 12.0369 13.3195 12.0399 13.3195C12.0429 13.3195 12.0469 13.3195 12.0499 13.3195C12.6799 13.3195 13.3099 13.1105 13.8299 12.6905L21.2549 6.75151C21.5779 6.49351 21.6699 6.03851 21.4759 5.67351Z" fill="currentColor"></path>                                </svg>                            
+                                    </i>
+                                    <span class="item-name ms-1 side-txt">Primary</span>
+                                </a>
+                            </li>
+                            <li class="card bg-soft-primary mb-2 col-9 nav-item ps-3 w-100  " id="navMsg2"
+                                style="min-width:3rem ;" onclick="toggleNavMsg2()">
+                                <a class="nav-link"  data-hx-get="{% url 'starred_messages' %} " hx-target="#message_list " hx-trigger="click" style="cursor:pointer ;">
+                                    <i class="icon">
+                                        <svg width="18" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4"
+                                                d="M12.9763 3.11361L15.2028 7.58789C15.3668 7.91205 15.6799 8.13717 16.041 8.18719L21.042 8.91556C21.3341 8.95658 21.5992 9.11066 21.7782 9.34578C21.9552 9.5779 22.0312 9.87205 21.9882 10.1612C21.9532 10.4013 21.8402 10.6234 21.6672 10.7935L18.0434 14.3063C17.7783 14.5514 17.6583 14.9146 17.7223 15.2698L18.6145 20.2083C18.7095 20.8046 18.3144 21.3669 17.7223 21.48C17.4783 21.519 17.2282 21.478 17.0082 21.3659L12.5472 19.0417C12.2161 18.8746 11.8251 18.8746 11.494 19.0417L7.03303 21.3659C6.48491 21.657 5.80576 21.4589 5.5007 20.9187C5.38767 20.7036 5.34766 20.4584 5.38467 20.2193L6.27686 15.2798C6.34088 14.9256 6.21985 14.5604 5.95579 14.3153L2.33202 10.8045C1.90092 10.3883 1.88792 9.70296 2.30301 9.27175C2.31201 9.26274 2.32201 9.25274 2.33202 9.24273C2.50405 9.06764 2.7301 8.95658 2.97415 8.92757L7.97523 8.1982C8.33531 8.14717 8.64837 7.92406 8.81341 7.59789L10.9599 3.11361C11.1509 2.72942 11.547 2.4903 11.9771 2.5003H12.1111C12.4842 2.54533 12.8093 2.77644 12.9763 3.11361Z"
+                                                fill="currentColor"></path>
+                                            <path
+                                                d="M11.992 18.9171C11.7983 18.9231 11.6096 18.9752 11.4399 19.0682L7.00072 21.3871C6.45756 21.6464 5.80756 21.4452 5.50303 20.9258C5.39021 20.7136 5.34927 20.4704 5.38721 20.2322L6.27384 15.3032C6.33375 14.9449 6.21394 14.5806 5.95334 14.3284L2.32794 10.8185C1.8976 10.3971 1.88961 9.70556 2.31096 9.27421C2.31695 9.26821 2.32195 9.2632 2.32794 9.2582C2.49967 9.08806 2.72133 8.97597 2.95996 8.94094L7.96523 8.20433C8.32767 8.1583 8.64219 7.93211 8.80194 7.60384L10.9776 3.06312C11.1843 2.69682 11.5806 2.47864 12 2.50166C11.992 2.7989 11.992 18.715 11.992 18.9171Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </i>
+                                    <span class="item-name ms-1 side-txt">Starred</span>
+                                </a>
+                            </li>
+                            <li class="card bg-soft-primary mb-2 col-9 nav-item ps-3 w-100  " id="navMsg3"
+                                style="min-width:3rem ;" onclick="toggleNavMsg3()">
+                                <a class="nav-link"  data-hx-get="{% url 'hidden_messages' %} " hx-target="#message_list " hx-trigger="click" style="cursor:pointer ;">
+                                    <i class="icon">
+                                        <svg width="18" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4" fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M11.9902 3.88184H12C13.3951 3.88184 14.7512 4.21657 16 4.84567L12.7415 8.13491C12.5073 8.09553 12.2537 8.066 12 8.066C9.8439 8.066 8.09756 9.82827 8.09756 12.004C8.09756 12.26 8.12683 12.516 8.16585 12.7523L4.5561 16.3949C3.58049 15.2529 2.73171 13.8736 2.05854 12.2895C1.98049 12.1123 1.98049 11.8957 2.05854 11.7087C4.14634 6.80583 7.86341 3.88184 11.9902 3.88184ZM18.4293 6.54985C19.8439 7.8494 21.0439 9.60183 21.9415 11.7087C22.0195 11.8957 22.0195 12.1123 21.9415 12.2895C19.8537 17.1924 16.1366 20.1262 12 20.1262H11.9902C10.1073 20.1262 8.30244 19.506 6.71219 18.3738L9.80488 15.2529C10.4293 15.6753 11.1902 15.9322 12 15.9322C14.1463 15.9322 15.8927 14.1699 15.8927 12.004C15.8927 11.1869 15.639 10.419 15.2195 9.78889L18.4293 6.54985Z"
+                                                fill="currentColor"></path>
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M18.4296 6.54952L20.2052 4.75771C20.4979 4.4722 20.4979 3.99964 20.2052 3.71413C19.9223 3.42862 19.4637 3.42862 19.1711 3.71413L18.254 4.63957C18.2442 4.65926 18.2247 4.67895 18.2052 4.69864C18.1954 4.71833 18.1759 4.73802 18.1564 4.75771L17.2881 5.63491L14.1954 8.7558L3.72715 19.3186L3.69789 19.358C3.50276 19.6435 3.54179 20.0383 3.78569 20.2844C3.92228 20.4311 4.1174 20.5 4.30276 20.5C4.48813 20.5 4.6735 20.4311 4.81984 20.2844L15.2198 9.78855L18.4296 6.54952ZM12.0004 14.4555C13.337 14.4555 14.4297 13.3529 14.4297 12.0041C14.4297 11.5906 14.3321 11.1968 14.1565 10.8621L10.8687 14.1798C11.2004 14.3571 11.5907 14.4555 12.0004 14.4555Z"
+                                                fill="currentColor"></path>
+                                        </svg>
+                                    </i>
+                                    <span class="item-name ms-1 side-txt">Hidden</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <div class=" body-msg col-10  overflow-scroll " style="max-height: 100%;" id="message_list">
+                    {% include 'admin/messages_list.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* // Medium devices (tablets, 768px and up) */
+    @media screen and (max-width: 990px) {
+        .side-txt {
+            display: none;
+        }
+
+    }
+
+    @media screen and (max-width: 760px) {
+        .body-msg{
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .side-bar-msg {
+            height: 4rem !important;
+        }
+
+        .ul-msg li {
+
+            width: 25% !important;
+            display: block !important;
+            float: left !important;
+            display: flex;
+            justify-content: center;
+
+        }
+
+
+        .ul-msg {
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            gap: .5rem !important;
+            justify-content: space-around;
+            margin: .75rem 0px !important;
+        }
+
+        .cb-msg {
+            padding: 0px !important;
+        }
+
+        .side-bar-msg {
+            margin: 0px auto;
+        }
+
+        /* .side-txt {
+            display: inline;
+            
+        } */
+
+
+
+    }
+</style>
+<script>
+    let navMsg1 = $("#navMsg1");
+    let navMsg2 = $("#navMsg2");
+    let navMsg3 = $("#navMsg3");
+    function toggleNavMsg1(){
+        navMsg1.removeClass("bg-soft-primary")
+        navMsg2.addClass("bg-soft-primary")
+        navMsg3.addClass("bg-soft-primary")
+    }
+    function toggleNavMsg2(){
+        navMsg1.addClass("bg-soft-primary")
+        navMsg2.removeClass("bg-soft-primary")
+        navMsg3.addClass("bg-soft-primary")
+    }
+    function toggleNavMsg3(){
+        navMsg1.addClass("bg-soft-primary")
+        navMsg2.addClass("bg-soft-primary")
+        navMsg3.removeClass("bg-soft-primary")
+    }
+</script>
+
+
+{% endblock content %}

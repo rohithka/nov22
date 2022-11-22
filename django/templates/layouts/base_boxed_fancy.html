@@ -1,0 +1,56 @@
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+      
+       <!-- including styele  -->
+       {% include 'style/style.html' %}
+
+           <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+
+
+  </head>
+  <body class="   boxed-fancy">
+    <div class="boxed-inner m-2 m-lg-5 m-md-4 m-xl-5">
+      <!-- loader Start -->
+      <div id="loading" class="w-100 h-100">
+        <div class="loader simple-loader w-100 h-100 ">
+            <div class="loader-body w-100 h-100  d-flex justify-content-center align-items-center ">
+              <img src="/static/assets/images/loading-mt.gif" class=" " width="100px" height="100px" alt="">
+            </div>
+        </div>      </div>
+      <!-- loader END -->
+
+
+      <span class="screen-darken"></span>
+      <main class="main-content">
+        
+
+
+        {% include 'includes/navbar_boxed_fancy.html' %}
+
+        {% block content %} {% endblock content %}
+        
+        {% include 'includes/messages.html'%}
+
+        <!-- Footer Section Start -->
+        {% include 'includes/footer.html' %}
+        <!-- Footer Section End -->  
+    
+    </main>
+      <!-- Wrapper End-->
+    </div>
+
+    {% include 'includes/settings.html' %}
+
+
+      <!-- imcluding javascript -->
+     {% include 'js/js.html' %}
+
+  </body>
+</html>

@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>MyTurf | Game Collaborating App</title>
+      
+
+      <!-- including styele  -->
+      {% include 'style/style.html' %}
+       <!-- Fullcalender CSS -->
+       <link rel='stylesheet' href='/static/assets/vendor/fullcalendar/core/main.css' />
+       <link rel='stylesheet' href='/static/assets/vendor/fullcalendar/daygrid/main.css' />
+       <link rel='stylesheet' href='/static/assets/vendor/fullcalendar/timegrid/main.css' />
+       <link rel='stylesheet' href='/static/assets/vendor/fullcalendar/list/main.css' />
+       <!-- <link rel='stylesheet' href='/static/assets/css/style.css' /> -->
+
+           <!-- HTMX -->
+           <script src="https://unpkg.com/htmx.org@1.6.0"></script>
+           
+  </head>
+  <body class="">
+
+    <!-- loader Start -->
+    <div id="loading" class="w-100 h-100">
+      <div class="loader simple-loader w-100 h-100 ">
+          <div class="loader-body w-100 h-100  d-flex justify-content-center align-items-center ">
+            <img src="/static/assets/images/loading-mt.gif" class=" " width="100px" height="100px" alt="">
+          </div>
+      </div>      </div>
+    <!-- loader END -->
+    
+    {% include 'includes/sidebar.html' %}
+
+    <main class="main-content">
+        <div class="position-relative iq-banner">
+
+          <div style="position: relative;top: 4.5rem;margin-bottom: 4.5rem;">
+    {% include 'includes/navbar.html' %}
+  </div>
+    {% include 'includes/messages.html'%}
+
+    
+    
+          <div style="position: relative;margin-bottom: 6rem;">
+            {% block content %}
+            
+            {% endblock content %}
+          </div>
+          <div > 
+          <div class="position-fixed bottom-0 w-100" style="z-index: 10;">
+            {% include 'includes/footer.html' %}   
+          </div> 
+        </div>
+        </main>
+        
+    {% include 'includes/settings.html' %}
+
+    <!-- including javascript -->
+     
+    {% include 'js/js.html' %}
+    {% block js%}{% endblock js%}
+
+    <script>
+      document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      })
+      </script>
+
+  </body>
+</html>

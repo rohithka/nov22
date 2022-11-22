@@ -1,0 +1,131 @@
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<section class="ecommerce container-fluid ">
+
+    <!-- ecommerce top bar ,filter -->
+    <div class="ecomerce-top-bar card p-3 m-3">
+        <div class="row ">
+            <div class="col-12 col-sm-4">
+                <span class="item-name" style="font-size: 1.4rem;">Shop</span>
+            </div>
+            <div class="col-12 col-sm-8 d-flex ecomerce-top-bar-btns justify-content-end row px-0">
+                <div class="btn-group col-6  col-sm-3">
+                    <button class="btn btn-primary dropdown-toggle px-3" type="button" id="filterdropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="icon">
+                            <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">                                
+                                <path d="M14.5715 13.5941L20.4266 7.72014C20.7929 7.35183 21 6.84877 21 6.32376V4.60099C21 3.52002 20.1423 3 
+                                    19.0844 3H4.91556C3.85765 3 3 3.52002 3 4.60099V6.3547C3 6.85177 3.18462 7.33087 3.51772 7.69419L8.89711 
+                                    13.5632C8.9987 13.674 9.14034 13.7368 9.28979 13.7378L14.1915 13.7518C14.3332 13.7528 14.4699 13.6969 
+                                    14.5715 13.5941Z" fill="currentColor">
+                                </path>                                
+                                <path opacity="0.4" d="M9.05615 13.6858V20.2904C9.05615 20.5309 9.17728 20.7575 9.37557 20.8873C9.48889 
+                                    20.9621 9.61978 21.0001 9.75068 21.0001C9.84934 21.0001 9.948 20.9791 10.0398 20.9372L14.0057 19.0886C14.2539 
+                                    18.9739 14.4131 18.7213 14.4131 18.4429V13.6858H9.05615Z" fill="currentColor">
+                                </path>                                
+                            </svg>
+                        </i>
+                        <span class="item-name">Filter</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="filterdropdown">
+                        <li>
+                            <a id="hTol" 
+                               class="dropdown-item"
+                               style="cursor: pointer;"
+                               hx-get="{% url 'htol_filter' %}" 
+                               hx-target="#row-shop-content"
+                               hx-trigger="click">
+                               High to Low Price
+                            </a>
+                        </li>
+                        <li>
+                            <a id="lToh" 
+                               class="dropdown-item"
+                               style="cursor: pointer;"
+                               hx-get="{% url 'ltoh_filter' %}" 
+                               hx-target="#row-shop-content"
+                               hx-trigger="click">
+                               Low to High Price
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aToz" 
+                               class="dropdown-item"
+                               style="cursor: pointer;"
+                               hx-get="{% url 'atoz_filter' %}" 
+                               hx-target="#row-shop-content"
+                               hx-trigger="click">
+                               A to Z Order</a>
+
+                            </li>
+                        <li>
+                            <a id="latest" 
+                               class="dropdown-item"
+                               style="cursor: pointer;"
+                               hx-get="{% url 'latest_filter' %}" 
+                               hx-target="#row-shop-content"
+                               hx-trigger="click">
+                               Latest
+                            </a>
+      
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex justify-content-end px-2 col-7 col-sm-5">
+                    <span class="input-group-text px-2"  id="inputGroupPrepend3">
+                        <svg xmlns="http://www.w3.org/2000/svg" 
+                             width="1.5em" 
+                             height="1.5em" 
+                             preserveAspectRatio="xMidYMid meet" 
+                             viewBox="0 0 24 24">
+                             <path fill="#3a57e8" fill-rule="evenodd" d="m16.325 14.899l5.38 5.38a1.008 1.008 0 0 1-1.427 
+                                1.426l-5.38-5.38a8 8 0 1 1 1.426-1.426ZM10 16a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z"/>
+                        </svg>
+                    </span>
+                    <input 
+                        type="text" 
+                        placeholder="Search..." 
+                        class="form-control" 
+                        name="searchproduct" 
+                        hx-post="{% url 'searchProduct' %}"
+                        hx-target='#row-shop-content'
+                        hx-trigger="keyup delay:500ms"
+                        
+                        />
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <!-- ecommerce main section -->
+    <div class="ecom-main-section my-3">
+        <div class="container-fluid p-3">
+            <div class="row" id="row-shop-content">
+                
+               {% include 'e_commerce/productlist.html' %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+</style>
+<script>
+    document.getElementById('shop-li').classList.add('active')
+</script>
+{% endblock content %}
